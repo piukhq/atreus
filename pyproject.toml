@@ -1,0 +1,27 @@
+[tool.poetry]
+name = "atreus"
+version = "0.1.0"
+description = ""
+authors = ["Thenuja Viknarajah <thenuja_1@outlook.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+fastapi = "^0.109.0"
+azure-identity = "^1.15.0"
+azure-keyvault-secrets = "^4.7.0"
+uvicorn = "^0.27.0.post1"
+tenacity = "^8.2.3"
+requests = "^2.31.0"
+jsonrpclib = "^0.2.1"
+pydantic = "^2.6.0"
+pydantic-settings = "^2.1.0"
+
+
+[tool.poetry.group.dev.dependencies]
+ruff = "^0.1.15"
+black = "^24.1.1"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

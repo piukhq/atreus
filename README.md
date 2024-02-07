@@ -4,7 +4,7 @@ A tool for Service Team to interact with amex, givex, stonegate and visa api
 
 
 ## Command Matrix
-| name      | description                                                                   |
+| name      | subcommand                                                                    |
 | ----------| ------------------------------------------------------------------------------|
 | amex      | merchant-search                                                               |
 | givex     | accounthistory, accountlookup                                                 |

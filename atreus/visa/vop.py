@@ -37,7 +37,7 @@ def VisaHelloWorld(auth: str) -> PlainTextResponse:
         return PlainTextResponse("Access Denied")
 
 
-@router.get("/vop/offercommunity", response_class=JSONResponse)
+@router.get("/vop/gettransaction", response_class=JSONResponse)
 @retry(stop=stop_after_attempt(10), wait=wait_fixed(30))
 def VisaGetTransaction(
     auth: str, transaction_amount: float, transaction_date: str, user_key: str, community_code: str
@@ -61,7 +61,7 @@ def VisaGetTransaction(
         return PlainTextResponse("Access Denied")
 
 
-@router.get("/vop/gettransaction", response_class=JSONResponse)
+@router.get("/vop/merchantsearch", response_class=JSONResponse)
 @retry(stop=stop_after_attempt(10), wait=wait_fixed(30))
 def VisaGetMerchant(
     auth: str, community_code: str, merchant_name: str, country_code: int, postal_code: str

@@ -18,7 +18,6 @@ logger = logging.getLogger(__name__)
 router = APIRouter()
 
 
-@router.post("/amex/merchant-search")
 def search_amex_merchants(request_body: dict):
     session = requests.Session()
     session.mount(settings.amex_hostname)
@@ -75,6 +74,7 @@ def client_id_and_secret():
     return client_id, client_secret
 
 
+@router.post("/amex/merchant-search")
 def amex_merchant_search(auth: str, postal_code: str, merchant_name: str, street: str, city: str, state: str):
     if auth:
         request_body = {
@@ -86,6 +86,6 @@ def amex_merchant_search(auth: str, postal_code: str, merchant_name: str, street
             "state": state,
         }
         r = search_amex_merchants(request_body)
-        return r.json()
+        return json.loads(r)
     else:
         return PlainTextResponse("Access Denied")

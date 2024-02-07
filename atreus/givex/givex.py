@@ -23,8 +23,7 @@ givex_password = _read_secret("givex-password")
 @router.get("/givex/accounthistory")
 def account_history(auth: str, givex_number: str):
     if auth:
-        logger.error("On get")
-
+        logger.info("Givex Accounthistory called")
         myuuid = uuid.uuid4()
         givex = jsonrpc.ServerProxy(f"https://{base_url}:50104")
         responses = givex.dc_995("en", str(myuuid), givex_username, givex_password, givex_number, "", "", "Points")
@@ -39,7 +38,7 @@ def account_history(auth: str, givex_number: str):
 @router.get("/givex/accountlookup")
 def account_lookup(auth: str, givex_number: str):
     if auth:
-        logger.error("On get")
+        logger.info("Givex Accountlookup called")
 
         myuuid = uuid.uuid4()
         givex = jsonrpc.ServerProxy(f"https://{base_url}:50104")

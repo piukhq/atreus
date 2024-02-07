@@ -78,7 +78,3 @@ def _post_offboards() -> dict:
         response = requests.post(url=endpoint, data=data)
         print(response.status_code)
         print("---")
-
-
-# _post_onboards(_create_onboards())
-_post_offboards(_create_offboards())

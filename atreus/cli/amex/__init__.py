@@ -9,7 +9,7 @@ import click
 @click.option("--city", help="City")
 @click.option("--state", help="State")
 def amex_merchant_search(auth: str, postal_code: str, merchant_name: str, street: str, city: str, state: str):
-    from atreus.amex.route import amex_merchant_search
+    from atreus.amex import amex_merchant_search
 
     print(
         amex_merchant_search(

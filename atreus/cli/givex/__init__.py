@@ -5,7 +5,7 @@ import click
 @click.option("--auth", help="Auth token")
 @click.option("--givex-number", help="Givex number")
 def givex_accounthistory(auth: str, givex_number: str):
-    from atreus.givex.givex import account_history
+    from atreus.givex import account_history
 
     print(account_history(auth=auth, givex_number=givex_number))
 
@@ -14,6 +14,6 @@ def givex_accounthistory(auth: str, givex_number: str):
 @click.option("--auth", help="Auth token")
 @click.option("--givex-number", help="Givex number")
 def givex_accountlookup(auth: str, givex_number: str):
-    from atreus.givex.givex import account_lookup
+    from atreus.givex import account_lookup
 
     print(account_lookup(auth=auth, givex_number=givex_number))

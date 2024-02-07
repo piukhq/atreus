@@ -4,7 +4,7 @@ import click
 @click.command(name="helloworld")
 @click.option("--auth", help="Auth token")
 def visa_helloworld(auth: str):
-    from atreus.visa.vop import VisaHelloWorld
+    from atreus.visa import VisaHelloWorld
 
     VisaHelloWorld(auth=auth)
 
@@ -16,7 +16,7 @@ def visa_helloworld(auth: str):
 @click.option("country-code", help="Country code")
 @click.option("--postal-code", help="Postal code")
 def visa_merchant_search(auth: str, community_code: str, merchant_name: str, country_code: str, postal_code: str):
-    from atreus.visa.vop import VisaGetMerchant
+    from atreus.visa import VisaGetMerchant
 
     print(
         VisaGetMerchant(
@@ -36,7 +36,7 @@ def visa_merchant_search(auth: str, community_code: str, merchant_name: str, cou
 @click.option("--user-key", help="User key")
 @click.option("--community-code", help="Community code")
 def visa_gettransaction(auth: str, transaction_amount: str, transaction_date: str, user_key: str, community_code: str):
-    from atreus.visa.vop import VisaGetTransaction
+    from atreus.visa import VisaGetTransaction
 
     print(
         VisaGetTransaction(
@@ -53,7 +53,7 @@ def visa_gettransaction(auth: str, transaction_amount: str, transaction_date: st
 @click.option("--auth", help="Auth token")
 @click.option("--community-code", help="Community code")
 def visa_merchant_group(auth: str, community_code: str):
-    from atreus.visa.vop import VisaSearchMerchantGroup
+    from atreus.visa import VisaSearchMerchantGroup
 
     print(VisaSearchMerchantGroup(auth=auth, community_code=community_code))
 
@@ -62,6 +62,6 @@ def visa_merchant_group(auth: str, community_code: str):
 @click.option("--auth", help="Auth token")
 @click.option("--community-code", help="Community code")
 def visa_offer_community(auth: str, community_code: str):
-    from atreus.visa.vop import VisaOfferCommunity
+    from atreus.visa import VisaOfferCommunity
 
     print(VisaOfferCommunity(auth=auth, community_code=community_code))

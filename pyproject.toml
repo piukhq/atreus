@@ -6,7 +6,7 @@ authors = ["Thenuja Viknarajah <thenuja_1@outlook.com>"]
 readme = "README.md"
 
 [tool.poetry.scripts]
-atreus = "atreus.cli.cli:cli"
+atreus = "atreus.cli:cli"
 
 [tool.poetry.dependencies]
 python = "^3.11"

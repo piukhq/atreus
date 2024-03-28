@@ -2,7 +2,7 @@ import json
 import logging
 import uuid
 
-from fastapi import APIRouter, Body
+from fastapi import APIRouter
 from fastapi.responses import PlainTextResponse
 from jsonrpclib import jsonrpc
 
@@ -14,54 +14,38 @@ logger = logging.getLogger(__name__)
 router = APIRouter()
 
 auth = settings.auth
+givex_number = settings.givex_number
 base_url = "dev-dataconnect.givex.com"
 givex_username = _read_secret("givex-username")
 givex_password = _read_secret("givex-password")
 
 
 @router.get("/givex/accounthistory")
-def account_history(auth: str, payload: str = Body()):
+def account_history(auth: str, givex_number: str):
     if auth:
         logger.info("Givex Accounthistory called")
         myuuid = uuid.uuid4()
-        data = json.loads(payload)
         givex = jsonrpc.ServerProxy(f"https://{base_url}:50104")
-        responses = givex.dc_995(
-            "en",
-            str(myuuid),
-            givex_username,
-            givex_password,
-            data["givex_number"],
-            "",
-            "",
-            "Points",
-        )
+        responses = givex.dc_995("en", str(myuuid), givex_username, givex_password, givex_number, "", "", "Points")
 
         json_responses = []
-        json_responses.append(
-            json.dumps(dict(zip(list(Givex995Response.model_fields.keys()), responses)))
-        )
+        json_responses.append(json.dumps(dict(zip(list(Givex995Response.model_fields.keys()), responses))))
         return json_responses
     else:
         return PlainTextResponse("Access Denied")
 
 
 @router.get("/givex/accountlookup")
-def account_lookup(auth: str, payload: str = Body()):
+def account_lookup(auth: str, givex_number: str):
     if auth:
         logger.info("Givex Accountlookup called")
-        data = json.loads(payload)
 
         myuuid = uuid.uuid4()
         givex = jsonrpc.ServerProxy(f"https://{base_url}:50104")
-        responses = givex.dc_996(
-            "en", str(myuuid), givex_username, givex_password, data["givex_number"]
-        )
+        responses = givex.dc_996("en", str(myuuid), givex_username, givex_password, givex_number)
 
         json_responses = []
-        json_responses.append(
-            json.dumps(dict(zip(list(Givex996Response.model_fields.keys()), responses)))
-        )
+        json_responses.append(json.dumps(dict(zip(list(Givex996Response.model_fields.keys()), responses))))
         return json_responses
     else:
         return PlainTextResponse("Access Denied")

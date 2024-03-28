@@ -1,3 +1,5 @@
+from typing import Optional
+
 from pydantic_settings import BaseSettings
 
 
@@ -8,9 +10,8 @@ class Settings(BaseSettings):
     amex_auth_token: str = ""
     amex_hostname: str = "https://apigateway2s.americanexpress.com"
     stonegate_atreemo_url: str = "https://rihanna.atreemo.uk"
-    secrets_path: str = "/mnt/secrets"
+    secrets_path: str = "/Users/thenujaviknarajah/mnt/secrets"
     auth: str = ""
-    givex_number: str = ""
 
 
 settings = Settings()

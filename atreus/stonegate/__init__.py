@@ -51,6 +51,7 @@ def find_by_email(email: str):
     try:
         return json.loads(response.text)
     except json.decoder.JSONDecodeError as e:
+        logger.info(e)
         return {"response_status": response.status_code, "error": str(response.text)}
 
 
@@ -75,4 +76,5 @@ def find_by_member_number(member_number: str):
     try:
         return json.loads(response.text)
     except json.decoder.JSONDecodeError as e:
+        logger.info(e)
         return {"response_status": response.status_code, "error": str(response.text)}

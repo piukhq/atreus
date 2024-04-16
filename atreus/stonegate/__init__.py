@@ -28,14 +28,16 @@ def call_auth_endpoint():
         "password": stonegate_auth["password"],
     }
     payload = urlencode(payload)
+
     response = requests.request("POST", url, headers=headers, data=payload)
-    return json.loads(response.text)["access_token"]
+    bearer_token = f'Bearer {json.loads(response.text)["access_token"]}'
+    return bearer_token
 
 
 @router.get("/sgg/findbyemail")
 def find_by_email(email: str):
     url = urljoin(base_url, "api/Customer/FindCustomerDetails")
-    bearer_token = call_auth_endpoint()["access_token"]
+    bearer_token = call_auth_endpoint()
     payload = json.dumps(
         {
             "SearchFilters": {"Email": email},
@@ -46,7 +48,11 @@ def find_by_email(email: str):
     headers = {"Content-Type": "application/json", "Authorization": bearer_token}
 
     response = requests.request("POST", url, headers=headers, data=payload)
-    return json.loads(response.text)
+    try:
+        return json.loads(response.text)
+    except json.decoder.JSONDecodeError as e:
+        logger.info(e)
+        return {"response_status": response.status_code, "error": str(response.text)}
 
 
 def get_email_from_query_params(email: str):
@@ -56,7 +62,7 @@ def get_email_from_query_params(email: str):
 @router.get("/sgg/findbymembernumber")
 def find_by_member_number(member_number: str):
     url = urljoin(base_url, "api/Customer/FindCustomerDetails")
-    bearer_token = call_auth_endpoint()["access_token"]
+    bearer_token = call_auth_endpoint()
     payload = json.dumps(
         {
             "SearchFilters": {"MemberNumber": member_number},
@@ -67,4 +73,8 @@ def find_by_member_number(member_number: str):
     headers = {"Content-Type": "application/json", "Authorization": bearer_token}
 
     response = requests.request("POST", url, headers=headers, data=payload)
-    return json.loads(response.text)
+    try:
+        return json.loads(response.text)
+    except json.decoder.JSONDecodeError as e:
+        logger.info(e)
+        return {"response_status": response.status_code, "error": str(response.text)}

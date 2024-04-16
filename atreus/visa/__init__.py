@@ -2,6 +2,8 @@ import requests
 from fastapi import APIRouter
 from fastapi.responses import JSONResponse, PlainTextResponse
 from tenacity import retry, stop_after_attempt, wait_fixed
+import logging
+
 
 from atreus.common import _read_secret
 from atreus.settings import settings
